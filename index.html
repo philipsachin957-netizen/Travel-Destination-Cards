@@ -1,87 +1,186 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderlust | Explore Destinations</title>
+    <meta name="description" content="Plan trips, explore destinations and estimate your travel budget with TripMate.">
+    <title>TripMate | Your Next Adventure Starts Here</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Discover Your Next Adventure</h1>
-            <p>Explore breathtaking destinations curated just for you.</p>
-        </div>
+    <header class="navbar">
+        <a class="logo" href="#home">Trip<span>Mate.</span></a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#features">Plan a Trip</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <a class="login-btn" href="#login">Sign In</a>
     </header>
 
-    <!-- Main Content: Destination Cards Grid -->
-    <main class="container">
-        <h2 class="section-title">Popular Destinations</h2>
-        
-        <div class="cards-grid">
-            
-            <!-- Card 1: Kyoto -->
-            <div class="card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80" alt="Kyoto, Japan">
-                </div>
-                <div class="card-content">
-                    <span class="tag">Japan</span>
-                    <h3>Kyoto Serenity</h3>
-                    <p>Immerse yourself in historic temples, bamboo groves, and traditional tea houses.</p>
-                    <a href="#" class="btn">Explore More</a>
-                </div>
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">YOUR JOURNEY, YOUR WAY</p>
+                <h1>Explore the world.<br>
+                    <span>Make memories.</span>
+                </h1>
+                <p class="hero-description">
+                    Discover amazing places, create your itinerary,
+                    and plan your next adventure without the stress.
+                </p>
+                <a href="#destinations" class="primary-btn">
+                    Explore Destinations →
+                </a>
             </div>
 
-            <!-- Card 2: Santorini -->
-            <div class="card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=600&q=80" alt="Santorini, Greece">
+            <div class="search-panel">
+                <div class="search-heading">
+                    <h2>Plan your next trip</h2>
+                    <p>Your next adventure is just a few steps away.</p>
                 </div>
-                <div class="card-content">
-                    <span class="tag">Greece</span>
-                    <h3>Santorini Sunsets</h3>
-                    <p>Experience iconic white-washed architecture, blue domes, and breathtaking caldera views.</p>
-                    <a href="#" class="btn">Explore More</a>
+
+                <form class="search-form" action="#destinations">
+                    <label>
+                        Destination
+                        <input type="text" name="destination"
+                               placeholder="Where do you want to go?">
+                    </label>
+
+                    <label>
+                        Departure date
+                        <input type="date" name="departure">
+                    </label>
+
+                    <label>
+                        Travellers
+                        <select name="travellers">
+                            <option>1 Traveller</option>
+                            <option>2 Travellers</option>
+                            <option>3 Travellers</option>
+                            <option>4+ Travellers</option>
+                        </select>
+                    </label>
+
+                    <button type="submit" class="primary-btn search-btn">
+                        Find Trips
+                    </button>
+                </form>
+                <p class="form-note">
+                    Preview only — trip search will be added in a later phase.
+                </p>
+            </div>
+        </section>
+
+        <section class="destinations section" id="destinations">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">FIND YOUR INSPIRATION</p>
+                    <h2>Popular destinations</h2>
+                    <p>Places that deserve a spot on your bucket list.</p>
                 </div>
+                <a href="#features" class="text-link">Explore more →</a>
             </div>
 
-            <!-- Card 3: Swiss Alps -->
-            <div class="card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=600&q=80" alt="Swiss Alps">
-                </div>
-                <div class="card-content">
-                    <span class="tag">Switzerland</span>
-                    <h3>Swiss Alps</h3>
-                    <p>Conquer majestic snow-capped peaks, scenic train routes, and alpine meadows.</p>
-                    <a href="#" class="btn">Explore More</a>
-                </div>
+            <div class="destination-grid">
+                <article class="destination-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=900&q=80"
+                        alt="Scenic Himalayan mountain landscape">
+                    <div class="card-content">
+                        <p class="location">INDIA · MOUNTAINS</p>
+                        <h3>Manali</h3>
+                        <p>Snowy peaks, mountain roads and peaceful escapes.</p>
+                        <div class="card-bottom">
+                            <span>From ₹5,000 / person</span>
+                            <a href="#features" aria-label="Explore Manali">↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="destination-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=900&q=80"
+                        alt="Green Kerala backwaters and tropical scenery">
+                    <div class="card-content">
+                        <p class="location">INDIA · NATURE</p>
+                        <h3>Kerala</h3>
+                        <p>Backwaters, lush greenery and coastal adventures.</p>
+                        <div class="card-bottom">
+                            <span>From ₹4,000 / person</span>
+                            <a href="#features" aria-label="Explore Kerala">↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="destination-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=900&q=80"
+                        alt="Tropical island destination">
+                    <div class="card-content">
+                        <p class="location">INDONESIA · ISLANDS</p>
+                        <h3>Bali</h3>
+                        <p>Tropical beaches, temples and unforgettable sunsets.</p>
+                        <div class="card-bottom">
+                            <span>From ₹25,000 / person</span>
+                            <a href="#features" aria-label="Explore Bali">↗</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <p class="disclaimer">
+                Prices are illustrative estimates, not live travel offers.
+            </p>
+        </section>
+
+        <section class="features section" id="features">
+            <div class="section-heading centered">
+                <p class="eyebrow">TRAVEL SMARTER</p>
+                <h2>Everything you need for your journey</h2>
+                <p>From the first idea to your final destination.</p>
             </div>
 
-            <!-- Card 4: Bali -->
-            <div class="card">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80" alt="Bali, Indonesia">
-                </div>
-                <div class="card-content">
-                    <span class="tag">Indonesia</span>
-                    <h3>Tropical Bali</h3>
-                    <p>Relax on pristine beaches, explore lush rainforests, and discover vibrant local culture.</p>
-                    <a href="#" class="btn">Explore More</a>
-                </div>
-            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">✈</div>
+                    <h3>Smart Itinerary</h3>
+                    <p>Organize your trip day by day with activities and places to visit.</p>
+                    <a href="#about">Plan your days →</a>
+                </article>
 
-        </div>
+                <article class="feature-card">
+                    <div class="feature-icon">₹</div>
+                    <h3>Budget Planner</h3>
+                    <p>Break down your travel expenses and plan within your budget.</p>
+                    <a href="#about">Plan your budget →</a>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">✦</div>
+                    <h3>AI Trip Ideas</h3>
+                    <p>Explore a preview of personalized trips based on your interests.</p>
+                    <a href="#about">Discover ideas →</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta-section" id="about">
+            <p class="eyebrow">YOUR NEXT CHAPTER AWAITS</p>
+            <h2>Less planning stress.<br>More unforgettable moments.</h2>
+            <p>Start exploring destinations and build your dream trip.</p>
+            <a href="#destinations" class="primary-btn">Start Exploring →</a>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Wanderlust Travel. CIE Lab Project.</p>
+    <footer class="footer">
+        <a class="logo" href="#home">Trip<span>Mate.</span></a>
+        <p>Made for curious minds and unforgettable journeys.</p>
+        <p>© 2026 TripMate · Student frontend project</p>
     </footer>
 
 </body>
