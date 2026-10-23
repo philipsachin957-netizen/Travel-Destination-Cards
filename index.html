@@ -1,187 +1,450 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plan trips, explore destinations and estimate your travel budget with TripMate.">
-    <title>TripMate | Your Next Adventure Starts Here</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102d29">
+  <meta name="description" content="Discover destinations, check destination weather, estimate passenger budgets and plan itineraries with TripMate.">
+  <title>TripMate — Discover Your Next Adventure</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <a class="logo" href="#home">Trip<span>Mate.</span></a>
+  <header class="navbar">
+    <a class="logo" href="#home">Trip<span>Mate</span><i>.</i></a>
 
-        <nav class="nav-links" aria-label="Main navigation">
-            <a href="#home">Home</a>
-            <a href="#destinations">Destinations</a>
-            <a href="#features">Plan a Trip</a>
-            <a href="#about">About</a>
-        </nav>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#planner">Weather &amp; Planner</a>
+      <a href="#budgetEstimator">Budget Estimator</a>
+      <a href="#experiences">Experiences</a>
+    </nav>
 
-        <a class="login-btn" href="#login">Sign In</a>
-    </header>
+    <a href="#planner" class="nav-cta">Plan a trip <span>↗</span></a>
 
-    <main>
-        <section class="hero" id="home">
-            <div class="hero-content">
-                <p class="eyebrow">YOUR JOURNEY, YOUR WAY</p>
-                <h1>Explore the world.<br>
-                    <span>Make memories.</span>
-                </h1>
-                <p class="hero-description">
-                    Discover amazing places, create your itinerary,
-                    and plan your next adventure without the stress.
-                </p>
-                <a href="#destinations" class="primary-btn">
-                    Explore Destinations →
-                </a>
+    <button class="menu-toggle" id="menuToggle" type="button"
+      aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <!-- HERO SECTION WITH 5-IMAGE SLIDER & DESTINATION BACKGROUND OVERRIDE -->
+    <section class="hero" id="home">
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="eyebrow light-eyebrow">
+          <span class="eyebrow-line"></span>
+          YOUR JOURNEY STARTS HERE
+        </div>
+
+        <h1>Collect moments.<br>
+          <span>Not just miles.</span>
+        </h1>
+
+        <p class="hero-description">
+          Find extraordinary places, build weather-smart itineraries, estimate
+          per-passenger budgets, and turn your travel dreams into unforgettable memories.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-btn" href="#destinations">
+            Explore destinations <span>↗</span>
+          </a>
+          <a class="text-button" href="#planner">
+            Weather &amp; Trip Planner <span>→</span>
+          </a>
+          <button type="button" class="hero-restore-btn" id="restoreSliderBtn">
+            ↺ Restore 5-Slide Background
+          </button>
+        </div>
+
+        <div class="hero-trust">
+          <div class="avatar-stack" aria-hidden="true">
+            <span>S</span><span>A</span><span>R</span><span>+</span>
+          </div>
+          <p><strong>Your next story awaits.</strong><br>
+            Curated across 11 iconic Indian &amp; global destinations.</p>
+        </div>
+      </div>
+
+      <div class="hero-location" id="heroLocation">
+        <span class="location-dot"></span>
+        <span id="heroLocationText">THE GREAT OUTDOORS · ALPINE PEAKS &amp; HIGHLANDS</span>
+      </div>
+
+      <div class="hero-slider-controls" aria-label="Background slider controls">
+        <div class="slider-dots" id="sliderDots"></div>
+        <div class="hero-count" id="heroCount">01 <span>/</span> 05</div>
+      </div>
+
+      <!-- GLASSMORPHISM SEARCH & PASSENGER FORM -->
+      <div class="search-panel" id="search">
+        <div class="search-heading">
+          <div>
+            <span class="mini-label">YOUR NEXT ADVENTURE</span>
+            <h2>Where to next?</h2>
+          </div>
+          <div class="search-heading-actions">
+            <span class="search-sparkle" aria-hidden="true">✳</span>
+          </div>
+        </div>
+
+        <form id="searchForm" class="search-form" novalidate>
+          <label class="search-field" for="destinationInput">
+            <span class="field-icon" aria-hidden="true">⌖</span>
+            <span class="field-content">
+              <span class="field-label">Destination</span>
+              <input id="destinationInput" type="text"
+                placeholder="Try Manali, Goa, Ooty, Paris..." list="places"
+                autocomplete="off">
+              <datalist id="places">
+                <option value="Manali"></option>
+                <option value="Kerala"></option>
+                <option value="Bali"></option>
+                <option value="Goa"></option>
+                <option value="Coorg"></option>
+                <option value="Jaipur"></option>
+                <option value="Ladakh"></option>
+                <option value="Paris"></option>
+                <option value="Ooty"></option>
+                <option value="Chennai"></option>
+                <option value="Bengaluru"></option>
+              </datalist>
+            </span>
+          </label>
+
+          <label class="search-field" for="departureInput">
+            <span class="field-icon" aria-hidden="true">▦</span>
+            <span class="field-content">
+              <span class="field-label">Departure Date</span>
+              <input id="departureInput" type="date">
+            </span>
+          </label>
+
+          <div class="search-field">
+            <span class="field-icon" aria-hidden="true">♙</span>
+            <div class="field-content">
+              <label class="field-label" for="passengerCountInput">Number of Passengers</label>
+              <div class="passenger-stepper">
+                <button type="button" class="stepper-btn" id="passengerDecBtn" aria-label="Decrease passengers">−</button>
+                <input id="passengerCountInput" type="number" min="1" max="50" step="1" value="1" required>
+                <button type="button" class="stepper-btn" id="passengerIncBtn" aria-label="Increase passengers">+</button>
+                <span class="passenger-unit" id="passengerUnitLabel">Passenger</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="search-submit" type="submit">
+            Explore <span>↗</span>
+          </button>
+        </form>
+
+        <div class="search-footer-bar">
+          <p class="search-note" id="searchMessage">
+            <span>✦</span> Discover places that match your travel mood.
+          </p>
+          <div class="quick-tags" aria-label="Popular destination quick filters">
+            <span class="quick-tag-label">Quick pick:</span>
+            <button type="button" class="quick-dest-chip" data-dest="manali">Manali</button>
+            <button type="button" class="quick-dest-chip" data-dest="goa">Goa</button>
+            <button type="button" class="quick-dest-chip" data-dest="kerala">Kerala</button>
+            <button type="button" class="quick-dest-chip" data-dest="jaipur">Jaipur</button>
+            <button type="button" class="quick-dest-chip" data-dest="ooty">Ooty</button>
+            <button type="button" class="quick-dest-chip" data-dest="chennai">Chennai</button>
+            <button type="button" class="quick-dest-chip" data-dest="bengaluru">Bengaluru</button>
+            <button type="button" class="quick-dest-chip" data-dest="paris">Paris</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTINATIONS DISCOVERY SECTION -->
+    <section class="section destinations-section" id="destinations">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> THE WORLD IS WAITING</div>
+          <h2 id="destinationHeading">Places worth <span>the journey.</span></h2>
+          <p id="destinationSubtitle">
+            From mountain hideaways to sun-kissed shores, find your kind of escape.
+          </p>
+        </div>
+        <div class="section-heading-controls">
+          <button type="button" class="outline-btn" id="resetDestinationsBtn">Show All Destinations ↺</button>
+          <a href="#planner" class="outline-btn">Open Trip Planner ↗</a>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="category-pills" role="tablist" aria-label="Filter destinations by category">
+          <button type="button" class="category-pill active" data-filter="all">All Destinations (11)</button>
+          <button type="button" class="category-pill" data-filter="mountains">Mountains &amp; Hills</button>
+          <button type="button" class="category-pill" data-filter="beaches">Beaches &amp; Coast</button>
+          <button type="button" class="category-pill" data-filter="heritage">Heritage &amp; Cities</button>
+          <button type="button" class="category-pill" data-filter="nature">Backwaters &amp; Nature</button>
+        </div>
+        <span class="results-counter" id="resultsCounter">Showing 11 of 11 curated destinations</span>
+      </div>
+
+      <div class="destination-grid" id="destinationGrid"></div>
+      <p class="disclaimer">Ratings and starting prices are illustrative planning estimates in INR (₹), not live travel offers.</p>
+    </section>
+
+    <!-- WEATHER, WEATHER-AWARE ITINERARY PLANNER & BUDGET ESTIMATOR -->
+    <section class="section planner-workspace-section" id="planner">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> SMART TRIP WORKSPACE</div>
+          <h2>Weather-smart planning &amp; <span>budgeting.</span></h2>
+          <p>Check destination weather conditions, customize weather-aware daily activities, and calculate your per-passenger trip budget.</p>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <!-- LEFT COLUMN: WEATHER COMPONENT & PASSENGER BUDGET ESTIMATOR -->
+        <div>
+          <!-- 5. DEDICATED WEATHER COMPONENT -->
+          <article class="panel-card" id="weatherWidget">
+            <div class="panel-header">
+              <div>
+                <span class="mini-label">DESTINATION WEATHER</span>
+                <h3>Current Conditions &amp; Forecast Mode</h3>
+              </div>
+              <span class="status-badge unverified" id="weatherStatusBadge">Unverified Mode</span>
             </div>
 
-            <div class="search-panel">
-                <div class="search-heading">
-                    <h2>Plan your next trip</h2>
-                    <p>Your next adventure is just a few steps away.</p>
-                </div>
-
-                <form class="search-form" action="#destinations">
-                    <label>
-                        Destination
-                        <input type="text" name="destination"
-                               placeholder="Where do you want to go?">
-                    </label>
-
-                    <label>
-                        Departure date
-                        <input type="date" name="departure">
-                    </label>
-
-                    <label>
-                        Travellers
-                        <select name="travellers">
-                            <option>1 Traveller</option>
-                            <option>2 Travellers</option>
-                            <option>3 Travellers</option>
-                            <option>4+ Travellers</option>
-                        </select>
-                    </label>
-
-                    <button type="submit" class="primary-btn search-btn">
-                        Find Trips
-                    </button>
-                </form>
-                <p class="form-note">
-                    Preview only — trip search will be added in a later phase.
-                </p>
-            </div>
-        </section>
-
-        <section class="destinations section" id="destinations">
-            <div class="section-heading">
+            <div class="weather-main">
+              <div class="weather-Dest-info">
+                <small id="weatherDestCountry">Himachal Pradesh, India</small>
+                <h4 id="weatherDestName">Manali</h4>
+                <p id="weatherSummaryText">Configure an OpenWeather API key or fetch via Open-Meteo for live conditions.</p>
+              </div>
+              <div class="weather-temp-box">
+                <span class="weather-icon-large" id="weatherIconLarge" aria-hidden="true">🧭</span>
                 <div>
-                    <p class="eyebrow">FIND YOUR INSPIRATION</p>
-                    <h2>Popular destinations</h2>
-                    <p>Places that deserve a spot on your bucket list.</p>
+                  <div class="weather-temp-value" id="weatherTempValue">— °C</div>
+                  <span class="weather-condition-pill" id="weatherConditionPill">Weather Unverified</span>
                 </div>
-                <a href="#features" class="text-link">Explore more →</a>
+              </div>
             </div>
 
-            <div class="destination-grid">
-                <article class="destination-card">
-                    <img
-                        src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=900&q=80"
-                        alt="Scenic Himalayan mountain landscape">
-                    <div class="card-content">
-                        <p class="location">INDIA · MOUNTAINS</p>
-                        <h3>Manali</h3>
-                        <p>Snowy peaks, mountain roads and peaceful escapes.</p>
-                        <div class="card-bottom">
-                            <span>From ₹5,000 / person</span>
-                            <a href="#features" aria-label="Explore Manali">↗</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="destination-card">
-                    <img
-                        src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=900&q=80"
-                        alt="Green Kerala backwaters and tropical scenery">
-                    <div class="card-content">
-                        <p class="location">INDIA · NATURE</p>
-                        <h3>Kerala</h3>
-                        <p>Backwaters, lush greenery and coastal adventures.</p>
-                        <div class="card-bottom">
-                            <span>From ₹4,000 / person</span>
-                            <a href="#features" aria-label="Explore Kerala">↗</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="destination-card">
-                    <img
-                        src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=900&q=80"
-                        alt="Tropical island destination">
-                    <div class="card-content">
-                        <p class="location">INDONESIA · ISLANDS</p>
-                        <h3>Bali</h3>
-                        <p>Tropical beaches, temples and unforgettable sunsets.</p>
-                        <div class="card-bottom">
-                            <span>From ₹25,000 / person</span>
-                            <a href="#features" aria-label="Explore Bali">↗</a>
-                        </div>
-                    </div>
-                </article>
+            <div class="weather-metrics">
+              <div class="weather-metric-item">
+                <small>Humidity</small>
+                <strong id="weatherHumidityVal">Unavailable</strong>
+              </div>
+              <div class="weather-metric-item">
+                <small>Wind</small>
+                <strong id="weatherWindVal">Unavailable</strong>
+              </div>
+              <div class="weather-metric-item">
+                <small>Planner Profile</small>
+                <strong id="weatherCategoryVal">Unverified</strong>
+              </div>
             </div>
-            <p class="disclaimer">
-                Prices are illustrative estimates, not live travel offers.
+
+            <p class="weather-notice" id="weatherNoticeBox">
+              Live weather is not currently active. Recommendations are general destination highlights and are not weather-verified.
             </p>
-        </section>
 
-        <section class="features section" id="features">
-            <div class="section-heading centered">
-                <p class="eyebrow">TRAVEL SMARTER</p>
-                <h2>Everything you need for your journey</h2>
-                <p>From the first idea to your final destination.</p>
+            <div class="weather-controls-bar">
+              <div class="weather-sim-group">
+                <span>Planning Weather Mode:</span>
+                <button type="button" class="weather-mode-btn active" data-weather-mode="unverified">Unverified</button>
+                <button type="button" class="weather-mode-btn" data-weather-mode="sunny">☀️ Sunny</button>
+                <button type="button" class="weather-mode-btn" data-weather-mode="rainy">🌧️ Rainy</button>
+                <button type="button" class="weather-mode-btn" data-weather-mode="cloudy">⛅ Cloudy</button>
+                <button type="button" class="weather-mode-btn" data-weather-mode="snowy">❄️ Cold / Snowy</button>
+              </div>
+              <button type="button" class="secondary-btn" id="fetchOpenMeteoBtn">
+                ↻ Fetch Live Weather
+              </button>
             </div>
 
-            <div class="feature-grid">
-                <article class="feature-card">
-                    <div class="feature-icon">✈</div>
-                    <h3>Smart Itinerary</h3>
-                    <p>Organize your trip day by day with activities and places to visit.</p>
-                    <a href="#about">Plan your days →</a>
-                </article>
+            <details class="api-config-details">
+              <summary>⚙️ Configure OpenWeather API Key &amp; Security Best Practices</summary>
+              <div class="api-config-body">
+                <p>Enter an OpenWeatherMap API key for session testing, or use a backend proxy endpoint in production so your private key is never exposed in public client code.</p>
+                <div class="api-input-row">
+                  <input type="password" id="openWeatherKeyInput" placeholder="Paste OpenWeather API key (session only)" autocomplete="off">
+                  <button type="button" class="secondary-btn" id="saveApiKeyBtn">Save &amp; Fetch</button>
+                </div>
+              </div>
+            </details>
+          </article>
 
-                <article class="feature-card">
-                    <div class="feature-icon">₹</div>
-                    <h3>Budget Planner</h3>
-                    <p>Break down your travel expenses and plan within your budget.</p>
-                    <a href="#about">Plan your budget →</a>
-                </article>
-
-                <article class="feature-card">
-                    <div class="feature-icon">✦</div>
-                    <h3>AI Trip Ideas</h3>
-                    <p>Explore a preview of personalized trips based on your interests.</p>
-                    <a href="#about">Discover ideas →</a>
-                </article>
+          <!-- 8. PASSENGER-BASED BUDGET ESTIMATOR -->
+          <article class="panel-card" id="budgetEstimator">
+            <div class="panel-header">
+              <div>
+                <span class="mini-label">ILLUSTRATIVE TRIP COST CALCULATOR</span>
+                <h3>Passenger-Based Budget Estimator</h3>
+              </div>
+              <span class="status-badge unverified">Estimates in INR (₹)</span>
             </div>
-        </section>
 
-        <section class="cta-section" id="about">
-            <p class="eyebrow">YOUR NEXT CHAPTER AWAITS</p>
-            <h2>Less planning stress.<br>More unforgettable moments.</h2>
-            <p>Start exploring destinations and build your dream trip.</p>
-            <a href="#destinations" class="primary-btn">Start Exploring →</a>
-        </section>
-    </main>
+            <div class="budget-controls-grid">
+              <div class="budget-field">
+                <label for="budgetDestinationSelect">Selected Destination</label>
+                <select id="budgetDestinationSelect">
+                  <option value="manali">Manali (Himachal Pradesh)</option>
+                  <option value="kerala">Kerala (Backwaters)</option>
+                  <option value="goa">Goa (Coastal Escape)</option>
+                  <option value="jaipur">Jaipur (Royal Heritage)</option>
+                  <option value="ooty">Ooty (Nilgiri Hills)</option>
+                  <option value="chennai">Chennai (Marina &amp; Culture)</option>
+                  <option value="bengaluru">Bengaluru (Gardens &amp; City)</option>
+                  <option value="coorg">Coorg (Coffee Hills)</option>
+                  <option value="ladakh">Ladakh (High Himalayas)</option>
+                  <option value="bali">Bali (Indonesia)</option>
+                  <option value="paris">Paris (France)</option>
+                </select>
+              </div>
 
-    <footer class="footer">
-        <a class="logo" href="#home">Trip<span>Mate.</span></a>
-        <p>Made for curious minds and unforgettable journeys.</p>
-        <p>© 2026 TripMate · Student frontend project</p>
-    </footer>
+              <div class="budget-field">
+                <label for="budgetPassengersInput">Number of Passengers</label>
+                <input type="number" id="budgetPassengersInput" min="1" max="50" step="1" value="1">
+              </div>
 
+              <div class="budget-field">
+                <label for="budgetDaysInput">Trip Duration (Days)</label>
+                <input type="number" id="budgetDaysInput" min="1" max="30" step="1" value="3">
+              </div>
+
+              <div class="budget-field">
+                <label for="budgetStayTier">Accommodation Style</label>
+                <select id="budgetStayTier">
+                  <option value="0.75">Budget Guesthouse / Hostel (0.75×)</option>
+                  <option value="1" selected>Standard Comfort 3★ Hotel (1.0×)</option>
+                  <option value="1.6">Boutique 4★ Resort (1.6×)</option>
+                  <option value="2.5">Luxury 5★ Heritage / Resort (2.5×)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="budget-summary-Highlight">
+              <div>
+                <small>Estimated Total Trip Budget</small>
+                <strong id="budgetTotalDisplay">₹15,050</strong>
+              </div>
+              <div class="per-person-box">
+                <small>Estimated Cost Per Passenger</small>
+                <strong id="budgetPerPersonDisplay">₹15,050 / passenger</strong>
+              </div>
+            </div>
+
+            <div class="budget-breakdown-list" id="budgetBreakdownList"></div>
+
+            <details class="custom-rates-details">
+              <summary>✎ Customize Unit Cost Assumptions (INR ₹)</summary>
+              <div class="custom-rates-grid">
+                <div class="budget-field">
+                  <label for="customStayRate">Stay per Room / Night (₹)</label>
+                  <input type="number" id="customStayRate" min="0" step="100" value="2400">
+                </div>
+                <div class="budget-field">
+                  <label for="customFoodRate">Food / Passenger / Day (₹)</label>
+                  <input type="number" id="customFoodRate" min="0" step="50" value="900">
+                </div>
+                <div class="budget-field">
+                  <label for="customTransportRate">Local Transport / Pax / Day (₹)</label>
+                  <input type="number" id="customTransportRate" min="0" step="50" value="800">
+                </div>
+                <div class="budget-field">
+                  <label for="customActivityRate">Activities / Pax / Day (₹)</label>
+                  <input type="number" id="customActivityRate" min="0" step="50" value="700">
+                </div>
+                <div class="budget-field">
+                  <label for="customFixedFee">Fixed Group Booking Fee (₹)</label>
+                  <input type="number" id="customFixedFee" min="0" step="50" value="500">
+                </div>
+              </div>
+            </details>
+
+            <p class="disclaimer">
+              All figures are illustrative planning estimates in INR (₹) rather than live ticket or hotel quotes. Fixed booking fees are applied once per trip and are not multiplied by passenger count.
+            </p>
+          </article>
+        </div>
+
+        <!-- RIGHT COLUMN: 6. WEATHER-BASED TRAVEL PLANNER -->
+        <article class="panel-card" id="itineraryPlannerCard">
+          <div class="panel-header">
+            <div>
+              <span class="mini-label">ADAPTIVE DAY-BY-DAY PLANNER</span>
+              <h3>Weather-Based Travel Itinerary</h3>
+            </div>
+            <span class="status-badge unverified" id="itineraryWeatherBadge">🧭 General (Not Weather-Verified)</span>
+          </div>
+
+          <div class="safety-banner">
+            <span aria-hidden="true">⚠️</span>
+            <p id="itinerarySafetyText">
+              Recommendations adapt to your selected destination and weather profile. Never assume outdoor activities are safe based solely on broad weather labels—always check local advisories.
+            </p>
+          </div>
+
+          <div class="itinerary-toolbar">
+            <small style="color: var(--muted); font-weight: 600;">Click any activity title below to edit it inline, or add your own stops.</small>
+            <button type="button" class="secondary-btn" id="resetItineraryBtn">↺ Reset Recommended Plan</button>
+          </div>
+
+          <div class="itinerary-list" id="itineraryList"></div>
+
+          <form class="add-activity-form" id="addActivityForm">
+            <select id="newActivityDay" aria-label="Select day slot">
+              <option value="Day 1 · Morning">Day 1 · Morning</option>
+              <option value="Day 1 · Afternoon">Day 1 · Afternoon</option>
+              <option value="Day 2 · Morning">Day 2 · Morning</option>
+              <option value="Day 2 · Evening">Day 2 · Evening</option>
+              <option value="Day 3 · Flexible">Day 3 · Flexible</option>
+            </select>
+            <input type="text" id="newActivityTitle" placeholder="Add a custom activity, café or landmark..." required>
+            <button type="submit" class="primary-btn" style="padding: 10px 18px; font-size: 0.84rem;">+ Add Activity</button>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPERIENCES SECTION (PRESERVED FROM EXISTING PROJECT) -->
+    <section class="experience-section" id="experiences">
+      <div class="section experience-inner">
+        <div class="experience-copy">
+          <div class="eyebrow light-eyebrow"><span class="eyebrow-line"></span> TRAVEL YOUR WAY</div>
+          <h2>Every great trip<br>starts with <span>a feeling.</span></h2>
+          <p>Whether you're chasing mountain sunrises, discovering hidden cafés,
+            or taking a well-deserved break, make your journey your own.</p>
+          <a href="#planner" class="primary-btn">Create your trip ↗</a>
+        </div>
+
+        <div class="experience-list">
+          <article><span class="experience-number">01</span><div><h3>Adventure</h3><p>Trails, peaks and the thrill of the unknown.</p></div><span class="experience-arrow">↗</span></article>
+          <article><span class="experience-number">02</span><div><h3>Slow travel</h3><p>Local stories, hidden gems and quieter moments.</p></div><span class="experience-arrow">↗</span></article>
+          <article><span class="experience-number">03</span><div><h3>Culture &amp; food</h3><p>Discover a destination through its people and flavours.</p></div><span class="experience-arrow">↗</span></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANNER BANNER (PRESERVED FROM EXISTING PROJECT) -->
+    <section class="planner-banner">
+      <div class="planner-content">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER</div>
+        <h2>Less planning stress.<br><span>More unforgettable moments.</span></h2>
+        <p>Your dream destination is out there. Let's make it happen.</p>
+        <a class="primary-btn" href="#search">Start planning ↗</a>
+      </div>
+      <div class="planner-decoration" aria-hidden="true">✳</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="logo" href="#home">Trip<span>Mate</span><i>.</i></a>
+    <p>Made for curious minds and unforgettable journeys.</p>
+    <a href="#home">Back to top ↑</a>
+    <small>© 2026 TripMate · Travel planning frontend project</small>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
